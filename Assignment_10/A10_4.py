@@ -1,0 +1,59 @@
+
+Even = lambda no : True if no%2 == 0 else False
+
+Square = lambda no : no**2
+
+Addition = lambda add, no : add + no
+
+class FMR:
+    def __init__(self):
+        self.FData = list()
+        self.MData = list()
+        self.RData = 0
+
+    def FilterX(self,Task,iList):
+        for data in iList:
+            ans = Task(data)
+
+            if(ans):
+                self.FData.append(data)
+
+        return self.FData
+    
+    def MapX(self,Task,FData):
+        for data in FData:
+            ans = Task(data)
+            self.MData.append(ans)
+
+        return self.MData
+
+    def ReduceX(self,Task,MData):
+        Add = 0
+        for data in MData:
+            self.RData += Task(Add,data)
+
+        return self.RData
+    
+def main():
+    iList = list()
+    no = int(input("Enter number of elements in list : "))
+
+    for i in range(no):
+        data = int(input(f"Enter element {i+1}: "))
+        iList.append(data)
+
+    print("Original list :",iList)
+
+    fobj = FMR()
+
+    FData = list(fobj.FilterX(Even,iList))
+    print("Filtered list :",FData)
+
+    MData = list(fobj.MapX(Square,FData))
+    print("Mapped data :",MData)
+
+    RData = fobj.ReduceX(Addition,MData)
+    print("Reduced Data :",RData)
+    
+if(__name__ == "__main__"):
+    main()
