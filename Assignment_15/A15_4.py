@@ -1,13 +1,21 @@
 import os
 import sys
 import filecmp
-
+import difflib
 
 # For a quick check if files are identical based on metadata, use filecmp.cmp(shallow=True).                
 # For a precise content comparison, use filecmp.cmp(shallow=False).                                         #Slower but accurate
 # For detailed, line-by-line differences, use difflib.                                                      #Provides detailed line by line comparison (Can be useful while comparing 2 files having minor differences, to trace those differences)
 # For simple content comparison of small files, use the == operator.
 
+def CmpFile3(fName1,fName3):
+
+   with open('file1.txt', 'r') as f1, open('file2.txt', 'r') as f2:
+       lines1 = f1.readlines()
+       lines2 = f2.readlines()
+       diff = difflib.unified_diff(lines1, lines2, fromfile='file1.txt', tofile='file2.txt')
+       for line in diff:
+           print(line, end="")
 
 def CmpFile2(fName1,fName2):
     flag1 = os.path.exists(fName1)
