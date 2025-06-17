@@ -12,6 +12,6 @@ def main():
     if Ret:
         print("File is present.")
     else:
-        print("File is not present.")
+        print("File is not present")
 if(__name__ == "__main__"):
     main()
