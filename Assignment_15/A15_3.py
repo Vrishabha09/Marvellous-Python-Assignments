@@ -6,6 +6,13 @@ def CopyFile2(fName,srcFile):
     # Use shutil.copy() if you only need to preserve the file's permission mode.                #Over writes data
     # Use shutil.copyfile() if you only need to copy the content and don't need any metadata.   
     # Use shutil.copyfileobj() for more control over the copying process.
+#     | Method                                   | Description                                                                            | Metadata Preserved     | Overwrites?           | Use Case                                                        |
+#     | ---------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------- | --------------------- | --------------------------------------------------------------- |
+#     | `shutil.copyfile(src, dst)`              | Copies *only* the file content from `src` to `dst`                                     | ❌ None                 | ✅ Yes                 | Fastest. When you only care about content (e.g., text data).    |
+#     | `shutil.copy(src, dst)`                  | Copies file content and **permission mode**                                            | ✅ Permission mode only | ✅ Yes                 | When you care about executable flags or permission consistency. |
+#     | `shutil.copy2(src, dst)`                 | Copies file content and **full metadata** (timestamps, permission, etc.)               | ✅ All metadata         | ✅ Yes                 | Best for backups where timestamps and metadata matter.          |
+#     | `shutil.copyfileobj(src_file, dst_file)` | Copies data between two **file objects**, gives **manual control** (e.g., buffer size) | ❌ Custom               | ✅ Based on your logic | Used when you want to process data during the copy.             |
+
 
     shutil.copy2(srcFile,fName)
 
